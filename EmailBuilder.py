@@ -10,6 +10,7 @@
 # **********************************************************
 import smtplib
 from ExcelTaskReader import ExcelTaskReader
+from ContextBuilder import ContextBuilder
 from email.mime.text import MIMEText
 import config
 import time
@@ -44,12 +45,14 @@ class EmailBuilder(object):
             for item in tmp.todolist:
                 content += item[1] + '\n'
 
-            sub = "Hello {name}!, don't forget these things today!".format(name=name)
+            sub = "Hello {name}! Don't forget these things today!".format(name=name)
+            contexter = ContextBuilder(name, content)
+            content = contexter.getContext()
+
             self.send_mail(email, sub, content)
 
     def send_mail(self, to, sub, content):
-        me = 'HuJian<' + self.user + '>'
-        #print(me)
+        me = 'WTD-Reminder<' + self.user + '>'
         msg = MIMEText(content,_subtype='plain',_charset='gb2312')
         msg['Subject'] = sub
         msg['From'] = me
@@ -71,3 +74,4 @@ if __name__ == '__main__':
     EB = EmailBuilder()
     EB.run()
     #a.send_mail('735342728@qq.com', 'send-email-test', 'Rt')
+    

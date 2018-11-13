@@ -28,7 +28,10 @@ class ExcelTaskReader(object):
         self.todolist = []
 
     def getTasks(self, cdate, finished_state = 'no'):
-        xls_path = 'Content/{name1}/{name2}_Calendar.xls'.format(name1=self.name, name2=self.name)
+        #base_dir = os.path.dirname(os.path.abspath(__file__)).replace('\\', '/' )
+        #xls_path = '/Content/{name1}/{name2}_Calendar.xls'.format(name1=self.name, name2=self.name)
+        #xls_path = base_dir + xls_path
+        xls_path = 'D:/GitFiles/What-To-Do-Reminder/Content/{name1}/{name2}_Calendar.xls'.format(name1=self.name, name2=self.name)
         book = xlrd.open_workbook(xls_path)
         sht = book.sheet_by_index(0)
         nrows = sht.nrows
