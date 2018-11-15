@@ -14,7 +14,7 @@ import win32serviceutil
 import win32service 
 import win32event
 import winerror
-import servicemanager
+#import servicemanager
 import os, sys, time, copy
 import config
 from EmailBuilder import EmailBuilder
@@ -26,7 +26,7 @@ class PythonService(win32serviceutil.ServiceFramework):
     _svc_description_ = "To remind people of things by email."   #服务的描述
     _promotion_time_list_ = [
             {'time':'23:00', 'isSent':0}, 
-            #{'time':'19:03', 'isSent':0}, 
+            #{'time':'23:06', 'isSent':0}, 
             #{'time':'22:00', 'isSent':0}, 
             #{'time':'19:05', 'isSent':0}, 
             ]

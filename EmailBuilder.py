@@ -43,7 +43,7 @@ class EmailBuilder(object):
             tmp.getTasks('{year}.{month}.{day}'.format(year=y, month=m, day=d))
             content = ''
             for item in tmp.todolist:
-                content += item[1] + '\n'
+                content += '<p>' + item[1] + '</p>'
 
             sub = "Hello {name}! Don't forget these things today!".format(name=name)
             contexter = ContextBuilder(name, content)
@@ -53,10 +53,11 @@ class EmailBuilder(object):
 
     def send_mail(self, to, sub, content):
         me = 'WTD-Reminder<' + self.user + '>'
-        msg = MIMEText(content,_subtype='plain',_charset='gb2312')
+        msg = MIMEText(content,_subtype='html',_charset='gb2312')
         msg['Subject'] = sub
         msg['From'] = me
-        msg['To'] = to
+        msg['To'] = to# + ';swjtu_hujian@163.com'
+        #print(conten
         try:
             server = smtplib.SMTP()
             server.connect(self.host)
@@ -64,8 +65,8 @@ class EmailBuilder(object):
             server.sendmail(me, to, msg.as_string())
             server.close()
             return True
-        except Exception(e):
-            print(e)
+        except Exception as e :
+            print(to, e)
             return False
 
 
